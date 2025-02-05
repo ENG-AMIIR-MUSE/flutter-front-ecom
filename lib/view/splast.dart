@@ -27,19 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
     final token = prefs.getString('token');
     await Future.delayed(const Duration(seconds: 3));
     if (token != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Home(),
-        ),
-      );
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => Home(),
+      //   ),
+      // );
+      Get.to(Home());
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SignUP(),
-        ),
-      );
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => SignUP(),
+      //   ),
+      // );
+      Get.to(SignUP());
     }
   }
 

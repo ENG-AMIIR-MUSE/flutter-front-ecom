@@ -10,12 +10,23 @@ import 'package:get/get.dart';
 import 'package:badges/badges.dart'
     as badges; // Add this import for badges package with prefix
 
-class CustomHeader extends StatelessWidget {
+class CustomHeader extends StatefulWidget {
   CustomHeader({super.key});
 
+  @override
+  State<CustomHeader> createState() => _CustomHeaderState();
+}
+
+class _CustomHeaderState extends State<CustomHeader> {
   final AuthController authController = Get.find();
-  final CartController cartController =
-      Get.find(); // Add this line to get the cart controller
+
+  final CartController cartController = Get.find();
+  // Add this line to get the cart controller
+  @override
+  void initState() {
+    // TODO: implement initState
+    authController.fetchUserData();
+  }
 
   @override
   Widget build(BuildContext context) {

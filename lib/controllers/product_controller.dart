@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
- // Add this import for custom toast messages
+// Add this import for custom toast messages
 
 class ProductController extends GetxController {
   var products = <Product>[].obs;
@@ -36,14 +36,28 @@ class ProductController extends GetxController {
         },
       );
       if (response.statusCode == 200) {
-        log("after response success data ${response.body}");
-        final List<dynamic> data = jsonDecode(response.body);
-        log("data $data");
-        products.value = data.map((json) => Product.fromJson(json)).toList();
-        log('Products fetched successfully');
-      } else {
-        log('Failed to load products: ${response.body}');
+          log("after response success data ${response.body}");
+      final List<dynamic> data = jsonDecode(response.body);
+      log("data $data");
+      
+      try {
+        products.value = data.map((json) {
+          try {
+            return Product.fromJson(json);
+          } catch (e) {
+            log('Error parsing individual product: $e');
+            log('Problematic JSON: $json');
+            return null;
+          }
+        }).whereType<Product>().toList();  // This will filter out any null values
+        
+        log('Products fetched successfully: ${products.length} products loaded');
+      } catch (e) {
+        log('Error mapping products: $e');
       }
+    } else {
+      log('Failed to load products: ${response.body}');
+    }
     } catch (e) {
       log('Error fetching products: $e');
     } finally {

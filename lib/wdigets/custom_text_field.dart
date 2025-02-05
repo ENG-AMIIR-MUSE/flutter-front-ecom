@@ -10,11 +10,11 @@ class CustomTextField extends StatefulWidget {
   final Color fillColor;
   final BorderRadius borderRadius;
   final TextStyle? textStyle;
-  
   final TextStyle? hintStyle;
   final bool alignText;
   final Function(String)? onChanged;
-  final IconData? leadingIcon; // Added leading icon
+  final IconData? leadingIcon;
+  final String? Function(String?)? validator; // Add validator parameter
 
   const CustomTextField(
       {Key? key,
@@ -30,7 +30,8 @@ class CustomTextField extends StatefulWidget {
       this.hintStyle,
       this.onChanged,
       this.alignText = false,
-      this.leadingIcon}) // Pass the leadingIcon as an optional parameter
+      this.leadingIcon,
+      this.validator}) // Pass the validator as an optional parameter
       : super(key: key);
 
   @override
@@ -48,12 +49,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       obscureText: _isObscured,
       textAlign: widget.alignText ? TextAlign.center : TextAlign.left,
       onChanged: widget.onChanged,
+      validator: widget.validator, // Add validator to the TextFormField
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.textFieldColor,

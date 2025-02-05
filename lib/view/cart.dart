@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ecomerce_final/controllers/cart_controller.dart';
 import 'package:ecomerce_final/core/constants/app_colors.dart';
 import 'package:ecomerce_final/core/constants/text_styles.dart';
+import 'package:ecomerce_final/view/SuccessPyament.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,9 +27,10 @@ class CartScreen extends StatelessWidget {
         .fetchCartItems(); // Fetch cart items when the screen is initialized
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Cart'),
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.whiteTextColor,
       ),
       body: Obx(() {
         if (cartController.isLoading.value) {
@@ -134,7 +136,9 @@ class CartScreen extends StatelessWidget {
                       SizedBox(width: 16),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(PaymentSuccessPage());
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             padding: EdgeInsets.symmetric(vertical: 16.0),

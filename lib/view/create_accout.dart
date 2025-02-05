@@ -1,4 +1,3 @@
-
 import 'package:ecomerce_final/controllers/auth_controller.dart';
 import 'package:ecomerce_final/core/constants/app_colors.dart';
 import 'package:ecomerce_final/core/constants/text_styles.dart';
@@ -18,6 +17,9 @@ class CreateAccount extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController secretQuestionController =
+      TextEditingController();
+  final TextEditingController secretAnswerController = TextEditingController();
   final AuthController authController = Get.put(AuthController());
 
   @override
@@ -66,6 +68,16 @@ class CreateAccount extends StatelessWidget {
               controller: phoneController,
               hintText: "Phone Number",
             ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              controller: secretQuestionController,
+              hintText: "Secret Question",
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              controller: secretAnswerController,
+              hintText: "Secret Answer",
+            ),
             const SizedBox(height: 40),
             CustomButton(
               text: "Continue",
@@ -76,6 +88,8 @@ class CreateAccount extends StatelessWidget {
                   email: emailController.text,
                   password: passwordController.text,
                   phone: phoneController.text,
+                  secretQuestion: secretQuestionController.text,
+                  secretAnswer: secretAnswerController.text,
                   context: context,
                 );
               },

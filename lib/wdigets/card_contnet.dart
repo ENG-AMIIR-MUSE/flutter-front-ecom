@@ -1,5 +1,3 @@
-
-
 import 'package:ecomerce_final/controllers/product_controller.dart';
 import 'package:ecomerce_final/core/constants/app_colors.dart';
 import 'package:ecomerce_final/core/constants/text_styles.dart';
@@ -81,11 +79,11 @@ class CardContent extends StatelessWidget {
                         width: 12,
                       ),
                       Text(
-                        "\$${product.price + 10}",
+                        "\$${(product.price + 15).toStringAsFixed(2)}",
                         style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )
